@@ -1,0 +1,23 @@
+{
+  "functions": [
+    {
+      "id": "GPT",
+      "name": "GPT",
+      "description": "Asks a question to GPT model.",
+      "result": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "name": "input",
+          "description": "The question or task for the GPT model.",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "namespace": "EYE",
+  "options": {
+    "sync": false
+  }
+}

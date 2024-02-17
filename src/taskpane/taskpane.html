@@ -1,0 +1,83 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!-- This file shows how to design a first-run page that provides a welcome screen to the user about the features of the add-in. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GPTforE2</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
+    />
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body class="ms-font-m ms-welcome ms-Fabric">
+    <header class="ms-welcome__header ms-bgColor-neutralLighter">
+      <img width="90" height="90" src="../../assets/e2-logo.png" alt="eye square" title="eye square" />
+    </header>
+    <main id="app-body" class="ms-welcome__main" style="display: flex">
+      <ul class="ms-List ms-welcome__features">
+        <li class="ms-ListItem">
+          <i class="ms-Icon ms-font-xl"><span class="ms-font-m">=EYE.AskGPT("YOUR MESSAGE")</span></i>
+        </li>
+        <li class="ms-ListItem">
+          <div>
+            <!-- Add a text input for the OpenAI API key -->
+            <input type="text" id="openai-api-key" placeholder="Enter OpenAI API Key" />
+            <button id="update-api-key">Update API Key</button>
+          </div>
+        </li>
+        <li class="ms-ListItem">
+          <select id="model-selector">
+            <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+            <option value="gpt-4-turbo-preview">GPT-4 Turbo</option>
+            <option value="gpt-3.5-turbo-instruct">GPT-3.5 Turbo Instruct</option>
+            <option value="babbage-002">babbage-002</option>
+            <option value="davinci-002">davinci-002</option>
+          </select>
+        </li>
+      </ul>
+    </main>
+    <script>
+      // Check if the variable exists in local storage
+      if (localStorage.getItem("SelectedModel")) {
+        // Retrieve the value from local storage
+        var storedValue = localStorage.getItem("SelectedModel");
+
+        // Get the select element
+        var modelSelector = document.getElementById("model-selector");
+
+        // Create a new option element
+        var option = document.createElement("option");
+
+        // Set the value and text content of the option to the retrieved value
+        option.value = storedValue;
+        option.textContent = storedValue;
+
+        // Set the 'selected' attribute to make it the initially selected option
+        option.selected = true;
+
+        // Insert the option as the first child of the select element
+        modelSelector.insertBefore(option, modelSelector.firstChild);
+      } else {
+        // Handle the case where the variable doesn't exist in local storage
+        console.log("The variable does not exist in local storage.");
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://downloadprep.eye-square.com/wagner/GPTforE2-main/src/functions/functions.js"
+    ></script>
+  </body>
+</html>
